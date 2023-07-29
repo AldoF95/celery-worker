@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Celery test</title>
+
+    <!--Google font-->
+    <link href="https://fonts.googleapis.com/css?family=K2D:300,400,500,700,800" rel="stylesheet">
+
+    <!-- Bootstrap CSS / Color Scheme -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+</head>
+<body>
+
+<!--Header Section-->
+<section class="bg-gradient pt-5 pb-6">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex flex-row align-items-center justify-content-between">
+                <div class="heading-brand">Celery</div>
+            </div>
+        </div>
+        <div class="row mt-6">
+            <div class="col-md-8 mx-auto text-center">
+                <h1>Distributed Task Queue</h1>
+                <p class="lead mb-5">Celery is a simple, flexible, and reliable distributed system to process vast amounts of messages, 
+                    while providing operations with the tools required to maintain such a system.</p>
+                <form action="/task" method="post">
+                    <a href=# id=test>
+                    <button class="btn btn-success svg-icon" type="submit">
+                        <em class="mr-2" data-feather="send"></em>
+                        Run Celery task
+                    </button></a>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-9 mx-auto">
+                <div class="code-window">
+                    <div class="dots">
+                        <div class="red"></div>
+                        <div class="orange"></div>
+                        <div class="green"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.7.3/feather.min.js"></script>
+<script>
+    console.log("test")
+    $(function () {
+        feather.replace();
+    })
+
+    $(function() {
+            $('a#test').bind('click', function() {
+                $.get('/task', function(data){console.log(data)});
+        return false;
+        });
+    })
+
+;
+</script>
+</body>
+</html>
