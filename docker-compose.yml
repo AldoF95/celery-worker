@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+     - "5000:5000"
+    depends_on:
+      - redis
+    volumes: ['./app:/app']
+  worker:
+    build:
+      context: ./celery_worker
+      dockerfile: Dockerfile
+    ports:
+     - "5555:5555"
+    command: celery -A tasks worker -l info -E
+    environment:
+      CELERY_BROKER: redis://redis:6379/0
+      CELERY_BACKEND: redis://redis:6379/1
+      MODEL_PATH: /celery/model/logReg_model
+    depends_on:
+      - redis
+    volumes: ['./celery_worker:/celery']
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
